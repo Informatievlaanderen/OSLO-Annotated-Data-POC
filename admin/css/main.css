@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: Segoe, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+td input {
+  width: 50px;
+}
+header {
+  line-height: 3em;
+}
+.sheet {
+  padding: 0 15px;
+}
+form {
+  display: inline-block;
+}
+.card .btn,
+.form-control {
+  font-size: 14px;
+}
+.jsonld {
+  font-size: 12px;
+  height: 50vh;
+}
+.valid.jsonld {
+  border-color: #ddd;
+}
+.entity {
+  border: 1px solid #ddd;
+  padding: 0 1em;
+}
+.control-subtle {
+  background: none;
+  border: none;
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+}
+.control-inline {
+  display: inline-block;
+  width: 220px;
+  margin-left: 1em;
+}
+.form-group-reduce {
+  margin-bottom: -15px;
+}
+.location h1 {
+  font-size: 1.25em;
+}
+[v-cloak] {
+  display: none;
+}
+.list-group {
+  display: block;
+}
+.list-group-item {
+  background: none
+}
+.select2-container--bootstrap {
+  min-width: 100%;
+}
+.col-form-label {
+  padding-top: .3rem;
+}
+.hour-days {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 13.3px;
+  white-space: pre;
+}
+.h2-subtle {
+  margin-bottom: 1em;
+  opacity: .5;
+  font-size: 20px;
+}
+.h2-subtle {
+  margin-top: 2em;
+}
+.h2-top {
+  margin-top: 30vh;
+}
+  header {
+    padding: 1em;
+  }
+@media (min-width: 50em) {
+  header {
+    position: fixed;
+    left: calc(50vw + 19em);
+    top: 0;
+  }
+}
+
+/* Card */
+
+.card-type {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #888;
+  color: white;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding: 0 4px;
+  font-size: 12px;
+  line-height: 1.5em;
+}
+.card-title {
+  margin-bottom: 0;
+}
+.card-subtitle {
+  margin-top: 0;
+}
+.card-header input {
+  border-radius: 0;
+  border-bottom: 1px solid transparent;
+}
+.card-header input:focus {
+  background: none;
+  border-bottom-color: #0275d8;
+}
+.card-addfields a {
+  display: inline-block;
+  margin-bottom: .6em;
+}
+.card-addfields a::before {
+  content: '+ '
+}
+.card-addfields a+a {
+  margin-left: 1em;
+}
+.card-add .card-header{
+  background: none;
+  font-style: italic;
+  color: #bbb;
+}
