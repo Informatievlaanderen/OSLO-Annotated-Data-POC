@@ -315,8 +315,10 @@ function fixISA(t) {
   if (t.location && t.location.length) {
     t['org:hasSite'] = []
     for (var i = 0; i < t.location.length; i++) {
-      t['org:hasSite'].push({ '@id': t.location[i]['@id'] })
-      fixLocationISA(t.location[i])
+      if (!empty(t.location[i])) {
+        t['org:hasSite'].push({ '@id': t.location[i]['@id'] })
+        fixLocationISA(t.location[i])
+      }
     }
   }
 }
@@ -609,7 +611,7 @@ function crabGemeenten() {
         if ($root) {
           $root.gemeenten = gemeenten
         }
-        console.log('gemeenten fetched', gemeenten.length, new Date())
+        console.log('crabGemeenten: fetched', gemeenten.length, new Date())
 
         resolve(data)
       })
@@ -634,7 +636,7 @@ var crabStreetsCache
 function crabStreets(gemeenteId) {
   if (typeof crabStreetsCache === 'undefined') {
     crabStreetsCache = ls('crabStreetsCache') || {}
-    console.log('Cached streets of', Object.keys(crabStreetsCache).join(', '))
+    console.log('crabStreets: Cached streets of', Object.keys(crabStreetsCache).length, 'localities')
   }
   if (typeof gemeenteId === 'string') {
     return crabStreetsByGemeenteNaam(gemeenteId)
@@ -656,7 +658,7 @@ function crabStreets(gemeenteId) {
         var streets = data.ListStraatnamenByGemeenteIdResult[0].StraatnaamItem.map(s => s.Straatnaam)
         crabStreetsCache[gemeenteId] = streets
         ls('crabStreetsCache', crabStreetsCache)
-        console.log('Cached streets of', Object.keys(crabStreetsCache).join(', '))
+        console.log('crabStreets: Cached streets of', Object.keys(crabStreetsCache).length, 'localities')
         resolve(streets)
       })
     })

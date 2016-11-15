@@ -12,9 +12,3 @@ COPY index.html /var/www/html/index.php
 
 # Define working directory.
 # WORKDIR /var/www/html
-
-# Run
-# docker run -d    --name oslo -p 81:80 fce567a58bba
-# docker run -d -P --name oslo -p 81:80 -v .:/var/www/html richarvey/nginx-php-fpm:php7
-# docker run -d --name oslo -p 81:80 -v /Users/thomas/projects/oslo:/var/www/html richarvey/nginx-php-fpm:php7
-# docker stop oslo2 && docker rm oslo2 && docker build -t oslo2 . && docker run -d --name oslo2 -p 81:80 oslo2

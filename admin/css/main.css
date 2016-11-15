@@ -79,14 +79,23 @@ form {
 .h2-top {
   margin-top: 30vh;
 }
-  header {
-    padding: 1em;
-  }
+header {
+  padding: 1rem;
+}
 @media (min-width: 50em) {
   header {
-    position: fixed;
-    left: calc(50vw + 19em);
+    position: absolute;
+    z-index: 1;
     top: 0;
+    width: 100%;
+  }
+  header .btn-success {
+    position: fixed;
+    left: calc(50vw + 20rem);
+  }
+  header .btn-primary {
+    position: absolute;
+    right: calc(50vw - 19rem);
   }
 }
 
@@ -128,7 +137,7 @@ form {
 .card-addfields a+a {
   margin-left: 1em;
 }
-.card-add .card-header{
+.card-add .card-header {
   background: none;
   font-style: italic;
   color: #bbb;

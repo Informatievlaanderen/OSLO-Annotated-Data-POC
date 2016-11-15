@@ -2,8 +2,8 @@
   <div class="form-group">
     <div class="float-sm-left col-form-label">
       <label class="form-check-inline" v-for="(day, d) in days">
-            <input class="form-check-input" type="checkbox" :checked="active[d]" @change="change(d, active[d])">
-          </label>
+        <input class="form-check-input" type="checkbox" :checked="active[d]" @change="change(d, active[d])">
+      </label>
     </div>
     <input type="text" class="form-control control-inline" placeholder="Leeglaten voor hele dag" v-model="time">
   </div>
@@ -21,7 +21,7 @@ Vue.component('opening-hour', {
           this.$set(this.parent.openingHours, this.i, v)
         } else {
           this.parent.openingHours.splice(this.i, 1)
-          this.parent.hoursAvailable.splice(this.i, 1)
+          this.parent.hoursAvailable && this.parent.hoursAvailable.splice(this.i, 1)
         }
       }
     },
@@ -48,7 +48,6 @@ Vue.component('opening-hour', {
       var a = a.map((a, index) => a && days[index]).filter(Boolean).join(',')
       var t = startAtNum(this.hour)
       this.hour = [a, t].filter(Boolean).join(' ')
-      console.log([a, t].filter(Boolean).join(' '))
     }
   },
   template: '#opening-hour-template'

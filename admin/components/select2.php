@@ -12,7 +12,6 @@ Vue.component('select2', {
       return
     }
     var vm = this
-    console.log('initial', this.value)
     $(this.$el)
       .val(this.value)
       // init select2

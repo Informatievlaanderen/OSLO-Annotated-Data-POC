@@ -1,7 +1,7 @@
 <script type="text/x-template" id="location-template">
   <div class="card">
     <!-- <div class="card-type">locatie</div> -->
-    <div class="card-header" @click="show.card=!show.card">
+    <div class="card-header" @click="show.card=1">
       <i class="fa-chevron-left glyphicon glyphicon-phone"></i>
       <h4 class="card-title"><input type="text" v-model="l.name" class="form-control control-subtle" placeholder="Naam van de locatie" autofocus></h4>
       <h6 class="card-subtitle text-muted" v-if="!show.card&&l.address&&l.address.addressLocality">{{ l.address.streetAddress }}, {{l.address.addressLocality}}</h6>
@@ -79,7 +79,7 @@ Vue.component('location', {
   props: ['l'],
   data() {
     if (empty(this.l.address)) {
-      console.log('empty location')
+      console.log('location: address is missing')
       this.l.address = createProp('address')
     }
     return {
@@ -114,10 +114,9 @@ Vue.component('location', {
       if (!this.l.address || !this.l.address.addressLocality) {
         return
       }
-      console.log('Loading streets for', this.l.address.addressLocality)
       crabStreets(this.l.address.addressLocality).then((straten) => {
         this.straten = straten
-        console.log('Loaded', straten.length, 'streets for', this.l.address.addressLocality)
+        console.log('location: has', straten.length, 'streets for', this.l.address.addressLocality)
       })
     }
   },

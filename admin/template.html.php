@@ -22,9 +22,8 @@
 <body>
   <div id="app" v-cloak>
     <header>
-      <form @submit.prevent="save">
-        <button class="btn btn-lg btn-success">Bewaren</button>
-      </form>
+      <button type="button" class="btn btn-lg btn-success" @click.prevent="save">Bewaren</button>
+      <a href="/" class="btn btn-lg btn-primary">Home</a>
     </header>
     <div class="container" style="max-width: 40em">
       <h2 class="h2-subtle">Organisatie</h2>
@@ -41,6 +40,10 @@
         </div>
       </div>
 
+      <p style="margin-top:10em;">
+        Met deze knop kan je de empty state zien, wijzigingen worden pas doorgevoerd als je op "Bewaren" klikt.
+        <br><button type="button" class="btn btn-danger" @click="reset">Reset naar empty state</button>
+      </p>
 
       <h2 class="h2-subtle h2-top">JSON-LD output</h2>
       <textarea v-model="stringified" class="form-control jsonld" :class="{valid:jsonldValid}"></textarea>
@@ -77,7 +80,6 @@
   <script>
   // ls('crabStreetsCache', false)
   // ls('crabGemeentenCache', false)
-  var straten = []
   var gemeenten = ls('crabGemeentenCache')
   if (!gemeenten || !gemeenten.length) {
     gemeenten = []
@@ -88,7 +90,7 @@
     })
   } else {
     gemeenten = gemeenten.map(g => g.GemeenteNaam)
-    console.log('gemeenten cache', gemeenten.length)
+    console.log('template: Cached', gemeenten.length, 'localities')
   }
   var jsonld = <?php echo json_encode($jsonld) ?>;
   // var days = 'Maandag,Disndag,Woensdag,Donderdag,Vrijdag,Zaterdag,Zondag'.split(',')
@@ -146,10 +148,7 @@
     el: '#app',
     data() {
       return {
-        stratenCache: 'gemeentenaam',
-        straten: straten,
         gemeenten: gemeenten,
-        days: days,
         thing: thing,
         stringified: jsonld,
         jsonldValid: true
@@ -178,25 +177,23 @@
       }
     },
     methods: {
-      add(prop) {
-        if (prop === null) {}
+      reset() {
+        this.thing = Object.assign(toObject(props), nestedProps, {})
       },
       save() {
         if (!this.jsonldValid) {
-          return alert('Cannot save')
+          return alert('Ongeldige JSON-LD kan niet bewaard worden')
         }
         putJSON('/admin/index.php', {
             jsonld: this.stringified
           })
           .then(data => {
-            console.log(data)
+            console.log('template: Saved', data)
           })
-      },
-      format() {
-        this.stringified = JSON.stringify(JSON.parse(this.stringified), null, 2)
+          .catch(data => {
+            console.warn('template: Failed to save', data)
+          })
       }
-    },
-    mounted() {
     },
     watch: {
       // stringified (x, y) {
@@ -220,7 +217,6 @@
         deep: true,
         handler (x, y) {
           x = inert(x)
-          // console.log(x)
           // Fixers
           x.url = fixUrl(x.url)
           x.email = fixEmail(x.email)
