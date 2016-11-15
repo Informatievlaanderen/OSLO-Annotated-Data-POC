@@ -48,7 +48,11 @@ Vue.component('service', {
   props: ['svc'],
   computed: {
     errors () {
-      return {}
+      var errors = {}
+      errors.url = this.svc.url ? !fixUrl(this.svc.url) : 0
+      errors.email = this.svc.email ? !fixEmail(this.svc.email) : 0
+      errors.telephone = this.svc.telephone ? !fixTelephone(this.svc.telephone) : 0
+      return errors
     }
   },
   data () {

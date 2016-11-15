@@ -265,10 +265,29 @@ function fixTelephone(t) {
   return t
 }
 
-function fixProvides(t) {
-  if (t['cpsv:provides'] && t['@id']) {
+function fixService(t) {
+  if (!empty(t['cpsv:provides'])) {
+    if (t['@id']) {
+      t['cpsv:provides']['provider'] = { '@id': t['@id'] }
+    }
     t['cpsv:provides']['@type'] = 'GovernmentService'
-    t['cpsv:provides']['provider'] = { '@id': t['@id'] }
+    fixChannel(t['cpsv:provides'])
+  }
+}
+function fixChannel(t) {
+  t.availableChannel = {
+    "@type": "ServiceChannel"
+  }
+  if (t.telephone) {
+    t.availableChannel.servicePhone ={
+      "@type": "ContactPoint",
+      "telephone": t.telephone
+    }
+    // delete t.telephone
+  }
+  if (t.url) {
+    t.availableChannel.serviceUrl = t.url
+    // delete t.url
   }
 }
 function fixSlug(t) {
@@ -350,13 +369,17 @@ function fixSchema(t) {
   if (t.location) {
     for (var i = 0; i < t.location.length; i++) {
       fixSchema(t.location[i])
+      if (t.location[i].address && t.location[i].address.addresscountry) {
+        t.location[i].address.addressCountry = t.location[i].address.addresscountry
+        delete t.location[i].address.addresscountry
+      }
     }
   }
 }
 
 function fixAll(t) {
   fixSlug(t)
-  fixProvides(t)
+  fixService(t)
   fixSchema(t)
   fixISA(t)
   fixType(t)

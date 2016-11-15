@@ -91,11 +91,17 @@ Vue.component('location', {
         email: false,
         telephone: false,
         url: false
-      },
-      errors: {}
+      }
     }
   },
   computed: {
+    errors () {
+      var errors = {}
+      errors.url = this.l.url ? !fixUrl(this.l.url) : 0
+      errors.email = this.l.email ? !fixEmail(this.l.email) : 0
+      errors.telephone = this.l.telephone ? !fixTelephone(this.l.telephone) : 0
+      return errors
+    },
     // Only show locality selector if empty or known locality
     selectLocality () {
       return this.$root.gemeenten.length &&

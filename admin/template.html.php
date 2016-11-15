@@ -107,6 +107,9 @@
     methods: {
       add(field) {
         this.show[field] = true
+        if (this.base) {
+          this.$set(this[this.base], field, null)
+        }
       },
       addM(thing, prop) {
         if (!this[thing][prop] || !this[thing][prop].length) {
@@ -121,10 +124,24 @@
   /* 
    * The idea here is to walk the graph and get 1 thing containing basic data
    * Locations are saved in thing.location
+   * Service is saved in thing.cpsv:provides
    *
    * When stringifying, extra triples are derived from the basic data
    */
-  var thing = Object.assign(toObject(props), nestedProps, fromGraph(JSON.parse(jsonld)))
+  var thing = fromGraph(JSON.parse(jsonld))
+
+  // Make everything reactive
+  if (thing['cpsv:provides']) {
+    thing['cpsv:provides'] = Object.assign(createProp('cpsv:provides'), thing['cpsv:provides'])
+  }
+  if (thing.location) {
+    for (var i = 0; i < thing.location.length; i++) {
+      thing.location[i] =  Object.assign(createProp('location'), thing.location[i])
+      thing.location[i].address =  Object.assign(createProp('address'), thing.location[i].address)
+    }
+  }
+
+  thing = Object.assign(toObject(props), nestedProps, thing)
   var $root = new Vue({
     el: '#app',
     data() {

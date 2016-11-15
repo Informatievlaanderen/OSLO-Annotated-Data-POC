@@ -49,7 +49,11 @@ Vue.component('organization', {
   props: ['org'],
   computed: {
     errors () {
-      return {}
+      var errors = {}
+      errors.url = this.org.url ? !fixUrl(this.org.url) : 0
+      errors.email = this.org.email ? !fixEmail(this.org.email) : 0
+      errors.telephone = this.org.telephone ? !fixTelephone(this.org.telephone) : 0
+      return errors
     }
   },
   data () {
