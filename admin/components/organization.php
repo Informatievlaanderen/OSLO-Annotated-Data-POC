@@ -11,7 +11,6 @@
         <a href="#" v-if="!org.email&&!show.email" @click.prevent="add('email')">email</a>
         <a href="#" v-if="!org.url&&!show.url" @click.prevent="add('url')">url</a>
         <a href="#" v-if="!org.description&&!show.description" @click.prevent="add('description')">beschrijving</a>
-        <a href="#" v-if="!org.openingHours" @click.prevent="addM('org', 'openingHours')">openingsuren</a>
       </div>
       <div class="form-group" :class="{'has-danger':errors.telephone}" v-if="org.telephone||show.telephone">
         <input type="text" class="form-control" v-model="org.telephone" placeholder="Telefoon">

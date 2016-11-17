@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>OSLO</title>
+  <title>OSLO Annotated Data POC</title>
   <meta name="theme-color" content="#099">
 
   <head>
@@ -22,10 +22,14 @@
 <body>
   <div id="app" v-cloak>
     <header>
-      <button type="button" class="btn btn-lg btn-success" @click.prevent="save">Bewaren</button>
       <a href="/" class="btn btn-lg btn-primary">Home</a>
+      <div class="header-fixed">
+        <button type="button" class="btn btn-lg btn-success" @click.prevent="save">Bewaren</button>
+        <p>{{ message }}</p>
+      </div>
     </header>
-    <div class="container" style="max-width: 40em">
+    <main class="container" style="width: 40em">
+      <h1>OSLO Annotated Data POC</h1>
       <h2 class="h2-subtle">Organisatie</h2>
       <organization :org="thing"></organization>
 
@@ -48,10 +52,10 @@
       <h2 class="h2-subtle h2-top">JSON-LD output</h2>
       <textarea v-model="stringified" class="form-control jsonld" :class="{valid:jsonldValid}"></textarea>
 
-      <h2 class="h2-subtle h2-top">Internal Vue state</h2>
+      <h2 class="h2-subtle h2-top">Internal Vue state for debugging</h2>
       <textarea class="form-control jsonld" :class="{valid:jsonldValid}" v-text="jsons"></textarea>
       </div>
-  </div>
+  </main>
 
   <!-- using string template here to work around HTML <option> placement restriction -->
   <script type="text/x-template" id="demo-template">
@@ -150,6 +154,7 @@
       return {
         gemeenten: gemeenten,
         thing: thing,
+        message: '',
         stringified: jsonld,
         jsonldValid: true
       }
@@ -178,20 +183,29 @@
     },
     methods: {
       reset() {
-        this.thing = Object.assign(toObject(props), nestedProps, {})
+        this.thing = Object.assign(toObject(props), nestedProps)
+        window.scrollTo(0, 0)
+      },
+      setMessage(msg) {
+        clearTimeout(this.messageTimeout)
+        this.message = msg
+        this.messageTimeout = setTimeout(() => this.message = this.message === msg ? '' : this.message, 3000)
       },
       save() {
+        this.message = ''
         if (!this.jsonldValid) {
-          return alert('Ongeldige JSON-LD kan niet bewaard worden')
+          return this.setMessage('Ongeldige JSON-LD kan niet bewaard worden')
         }
         putJSON('/admin/index.php', {
             jsonld: this.stringified
           })
           .then(data => {
-            console.log('template: Saved', data)
+            console.log(data)
+            this.setMessage('Wijzigingen bewaard')
           })
           .catch(data => {
-            console.warn('template: Failed to save', data)
+            console.log(data)
+            this.setMessage('Er trad een fout op')
           })
       }
     },
