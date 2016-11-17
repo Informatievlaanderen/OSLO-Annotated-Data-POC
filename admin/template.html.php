@@ -12,7 +12,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/select2@4.0.3/dist/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/select2-bootstrap-theme@0.1.0-beta.9/dist/select2-bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/admin/css/main.css">
@@ -235,7 +235,7 @@
           x.url = fixUrl(x.url)
           x.email = fixEmail(x.email)
           x.telephone = fixTelephone(x.telephone)
-          fixAll(x)
+          addSemantics(x)
           // Filter out empty values
           cleanEmpty(x)
           x = toGraph(x)
