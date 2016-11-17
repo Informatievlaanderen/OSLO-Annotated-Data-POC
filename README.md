@@ -2,11 +2,14 @@ OSLO
 ----
 
 ### Workflow
-`index.html` is read by php and finds json-ld by regex.
-The json-ld piece is inserted in js.
-It walks the graph and retrieves the basic data (mostly Schema.org).
-After making a change, an expanded version of the model containing ISA core triples is stringified.
-Save will send a PUT request to save what's on the left.
+`index.html` is a page about an organisation/service/location.  
+The metadata in the document can be managed on `/admin/`.
+
+The editor looks for a JSON-LD scripttag and passes the content to the frontend.  
+On page load, the existing JSON-LD graph is transformed to the internal model: 1 organisation containing a service and some locations. Schema.org is expected as default context.  
+After making a change, ISA core triples are added to the model and then outputted as JSON-LD.
+
+Saving will send a PUT request to replace the old metadata by the latest JSON-LD. If there was no metadata before, it will be inserted before `</body>` or `</head>`.
 
 ### Get started
     docker pull thgh/oslo
