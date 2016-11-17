@@ -350,6 +350,7 @@
         <div class="content u-spacer typography">
         <h1>Waar vindt u ons?</h1>
         <!--locations-->
+<h3 style="margin:1em 0 0;">Anna Bijnsgebouw (VAC Antwerpen)</h3><p>Lange Kievitstraat 111-113, AntwerpenBE<h3 style="margin:1em 0 0;">Boudewijngebouw</h3><p>Boudewijnlaan 30, BrusselBE<h3 style="margin:1em 0 0;">Wirtschaftsvertretung Flandern C/&ndash; Botschaft von Belgien</h3><p>J&auml;gerstra&szlig;e 52-53, BerlijnDE<h3 style="margin:1em 0 0;">Flanders Investment and Trade</h3><p>Via Fiori Oscuri 11, MilaanIT
 <!--/locations-->
         </div>
       </div>
@@ -1498,234 +1499,198 @@
 <!-- JSON-LD start -->
 <script type="application/ld+json">
 {
-  "@context": [{
-      "dct": "http://purl.org/dc/terms/",
-      "cpsv": "http://purl.org/vocab/cpsv#",
+  "@context": [
+    {
       "cpov": "http://unknown/cpov#",
-      "schema": "http://schema.org/",
-      "org": "http://www.w3.org/ns/org#",
+      "cpsv": "http://purl.org/vocab/cpsv#",
+      "dct": "http://purl.org/dc/terms/",
       "foaf": "http://xmlns.com/foaf/0.1/",
+      "locn": "http://www.w3.org/ns/locn#",
+      "org": "http://www.w3.org/ns/org#",
+      "owl": "https://www.w3.org/2002/07/owl#",
       "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-      "vcard": "https://www.w3.org/2006/vcard/ns#",
-      "owl": "https://www.w3.org/2002/07/owl#"
+      "schema": "http://schema.org/",
+      "vcard": "https://www.w3.org/2006/vcard/ns#"
     },
     "http://schema.org"
   ],
-  "@graph": [{
-    "@id": "_:1700service-core",
-    "@type": "cpsv:PublicService",
-    "dct:title": "Gratis informatienummer van de Vlaamse overheid",
-    "dct:description": "1700 is het gratis informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
-    "schema:contactPoint": {
-      "@type": "schema:ContactPoint",
-      "vcard:hasTelephone": { "@id": "tel:1700" }
-    },
-    "dct:temporal": {
-      "schema:openingHours": "Mo,Tu,We,Th,Fr 9:00-19:00"
+  "@graph": [
+    {
+      "url": "https://overheid.vlaanderen.be/",
+      "name": "Vlaamse Overheid",
+      "location": [
+        {
+          "@type": [
+            "Place",
+            "org:Site",
+            "dct:Location"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BE",
+            "addressLocality": "Antwerpen",
+            "postalCode": "2018",
+            "streetAddress": "Lange Kievitstraat 111-113",
+            "@id": "_:vacAntwerpen-addr-schema"
+          },
+          "name": "Anna Bijnsgebouw (VAC Antwerpen)",
+          "telephone": "+32 32 24 60 81",
+          "url": "https://www.vlaanderen.be/nl/vlaamse-overheid/anna-bijnsgebouw-vac-antwerpen",
+          "@id": "_:vlaamseoverheid-core-anna-bijnsgebouw-vac-antwerpen",
+          "vcard:hasTelephone": {
+            "@type": [
+              "Work",
+              "Voice"
+            ],
+            "vcard:hasValue": "tel:+32 32 24 60 81"
+          },
+          "dct:title": "Anna Bijnsgebouw (VAC Antwerpen)",
+          "rdfs:label": "Anna Bijnsgebouw (VAC Antwerpen)",
+          "locn:address": {
+            "@type": "locn:Address",
+            "locn:thoroughfare": "Lange Kievitstraat",
+            "locn:locatorDesignator": "111-113",
+            "locn:postName": "Antwerpen",
+            "locn:adminUnitL1": "BE"
+          },
+          "foaf:page": {
+            "@id": "https://www.vlaanderen.be/nl/vlaamse-overheid/anna-bijnsgebouw-vac-antwerpen"
+          }
+        },
+        {
+          "@type": [
+            "Place",
+            "org:Site",
+            "dct:Location"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BE",
+            "addressLocality": "Brussel",
+            "postalCode": "1000",
+            "streetAddress": "Boudewijnlaan 30",
+            "@id": "_:boudewijngebouw-addr-schema"
+          },
+          "name": "Boudewijngebouw",
+          "telephone": "+32 25 53 20 88",
+          "url": "https://www.vlaanderen.be/nl/vlaamse-overheid/boudewijngebouw",
+          "@id": "_:vlaamseoverheid-core-boudewijngebouw",
+          "vcard:hasTelephone": {
+            "@type": [
+              "Work",
+              "Voice"
+            ],
+            "vcard:hasValue": "tel:+32 25 53 20 88"
+          },
+          "dct:title": "Boudewijngebouw",
+          "rdfs:label": "Boudewijngebouw",
+          "locn:address": {
+            "@type": "locn:Address",
+            "locn:thoroughfare": "Boudewijnlaan",
+            "locn:locatorDesignator": "30",
+            "locn:postName": "Brussel",
+            "locn:adminUnitL1": "BE"
+          },
+          "foaf:page": {
+            "@id": "https://www.vlaanderen.be/nl/vlaamse-overheid/boudewijngebouw"
+          }
+        },
+        {
+          "@type": [
+            "Place",
+            "org:Site",
+            "dct:Location"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "DE",
+            "addressLocality": "Berlijn",
+            "postalCode": "10117",
+            "streetAddress": "Jägerstraße 52-53",
+            "@id": "_:jagerstrasse-addr-schema"
+          },
+          "name": "Wirtschaftsvertretung Flandern C/– Botschaft von Belgien",
+          "telephone": "+49 30 20 64 25 02",
+          "@id": "_:vlaamseoverheid-core-wirtschaftsvertretung-flandern-c-botschaft-von-belgien",
+          "vcard:hasTelephone": {
+            "@type": [
+              "Work",
+              "Voice"
+            ],
+            "vcard:hasValue": "tel:+49 30 20 64 25 02"
+          },
+          "dct:title": "Wirtschaftsvertretung Flandern C/– Botschaft von Belgien",
+          "rdfs:label": "Wirtschaftsvertretung Flandern C/– Botschaft von Belgien",
+          "locn:address": {
+            "@type": "locn:Address",
+            "locn:thoroughfare": "Jägerstraße",
+            "locn:locatorDesignator": "52-53",
+            "locn:postName": "Berlijn",
+            "locn:adminUnitL1": "DE"
+          }
+        },
+        {
+          "@type": [
+            "Place",
+            "org:Site",
+            "dct:Location"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IT",
+            "addressLocality": "Milaan",
+            "postalCode": "20121",
+            "streetAddress": "Via Fiori Oscuri 11",
+            "@id": "_:viaFioriOscuri-addr-schema"
+          },
+          "name": "Flanders Investment and Trade",
+          "telephone": "+39 02 29 00 70 80",
+          "@id": "_:vlaamseoverheid-core-flanders-investment-and-trade",
+          "vcard:hasTelephone": {
+            "@type": [
+              "Work",
+              "Voice"
+            ],
+            "vcard:hasValue": "tel:+39 02 29 00 70 80"
+          },
+          "dct:title": "Flanders Investment and Trade",
+          "rdfs:label": "Flanders Investment and Trade",
+          "locn:address": {
+            "@type": "locn:Address",
+            "locn:thoroughfare": "Via Fiori Oscuri",
+            "locn:locatorDesignator": "11",
+            "locn:postName": "Milaan",
+            "locn:adminUnitL1": "IT"
+          }
+        }
+      ],
+      "@id": "_:vlaamseoverheid-core",
+      "@type": [
+        "GovernmentOrganization",
+        "cpov:PublicOrganization",
+        "org:FormalOrganization"
+      ],
+      "rdfs:label": "Vlaamse Overheid",
+      "foaf:homepage": {
+        "@id": "https://overheid.vlaanderen.be/"
+      },
+      "org:hasSite": [
+        {
+          "@id": "_:vlaamseoverheid-core-anna-bijnsgebouw-vac-antwerpen"
+        },
+        {
+          "@id": "_:vlaamseoverheid-core-boudewijngebouw"
+        },
+        {
+          "@id": "_:vlaamseoverheid-core-wirtschaftsvertretung-flandern-c-botschaft-von-belgien"
+        },
+        {
+          "@id": "_:vlaamseoverheid-core-flanders-investment-and-trade"
+        }
+      ],
+      "dct:title": "Vlaamse Overheid"
     }
-  }, {
-    "@id": "_:vlaamseoverheid-core",
-    "@type": ["cpov:PublicOrganization", "org:FormalOrganization"],
-    "rdfs:label": "Vlaamse Overheid",
-    "foaf:homepage": { "@id": "https://overheid.vlaanderen.be/" },
-    "cpsv:provides": { "@id": "_:1700service-core" },
-    "org:hasSite": [{
-      "@id": "_:vacAntwerpen-core",
-      "@type": ["org:Site", "dct:Location"],
-      "rdfs:label": "Anna Bijnsgebouw (VAC Antwerpen)",
-      "foaf:page": "https://www.vlaanderen.be/nl/vlaamse-overheid/anna-bijnsgebouw-vac-antwerpen",
-      "vcard:hasTelephone": { "@id": "tel:+32 32 24 60 81" },
-      "locn:address": {
-        "@id": "_:vacAntwerpen-addr-core",
-        "@type": "locn:Address",
-        "locn:thoroughfare": "Lange Kievitstraat",
-        "locn:locatorDesignator": "111-113",
-        "locn:postName": "Antwerpen",
-        "locn:adminUnitL1": "BE"
-      }
-    }, {
-      "@id": "_:boudewijngebouw-core",
-      "@type": ["org:Site", "dct:Location"],
-      "rdfs:label": "Boudewijngebouw",
-      "foaf:page": "https://www.vlaanderen.be/nl/vlaamse-overheid/boudewijngebouw",
-      "vcard:hasTelephone": { "@id": "tel:+32 25 53 20 88" },
-      "locn:address": {
-        "@id": "_:boudewijngebouw-addr-core",
-        "@type": "locn:Address",
-        "locn:thoroughfare": "Boudewijnlaan",
-        "locn:locatorDesignator": "30",
-        "locn:postName": "Brussel",
-        "locn:adminUnitL1": "BE"
-      }
-    }, {
-      "@id": "_:jagerstrasse-core",
-      "@type": ["org:Site", "dct:Location"],
-      "rdfs:label": "Wirtschaftsvertretung Flandern C/– Botschaft von Belgien",
-      "vcard:hasTelephone": { "@id": "tel:+49 30 20 64 25 02" },
-      "locn:address": {
-        "@id": "_:jagerstrasse-addr-core",
-        "@type": "locn:Address",
-        "locn:thoroughfare": "Jägerstraße",
-        "locn:locatorDesignator": "52-53",
-        "locn:postName": "Berlijn",
-        "locn:adminUnitL1": "DE"
-      }
-    }, {
-      "@id": "_:viaFioriOscuri-core",
-      "@type": ["org:Site", "dct:Location"],
-      "rdfs:label": "Flanders Investment and Trade",
-      "vcard:hasTelephone": { "@id": "tel:+39 02 29 00 70 80" },
-      "locn:address": {
-        "@id": "_:viaFioriOscuri-addr-core",
-        "@type": "locn:Address",
-        "locn:thoroughfare": "Via Fiori Oscuri",
-        "locn:locatorDesignator": "11",
-        "locn:postName": "Milaan",
-        "locn:adminUnitL1": "IT"
-      }
-    }]
-  }, {
-    "@id": "https://www.vlaanderen.be/nl/vlaamse-overheid/contact",
-    "@type": "ContactPage",
-    "name": "Contact"
-  }, {
-    "@id": "_:1700service-schema",
-    "@type": "GovernmentService",
-    "name": "Informatienummer van de Vlaamse overheid",
-    "description": "1700 is het informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
-    "provider": {
-      "@id": "_:vlaamseoverheid-schema"
-    },
-    "availableChannel": {
-      "@type": "ServiceChannel",
-      "serviceUrl": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact",
-      "servicePhone": [{
-        "@type": "ContactPoint",
-        "telephone": "1700",
-        "contactOption": "TollFree",
-        "areaServed": "BE"
-      }, {
-        "@type": "ContactPoint",
-        "telephone": "+32 2 553 1700"
-      }]
-    },
-    "hoursAvailable": [{
-      "@type": "OpeningHoursSpecification",
-      "closes": "19:00:00",
-      "dayOfWeek": "http://schema.org/Monday",
-      "opens": "09:00:00"
-    }, {
-      "@type": "OpeningHoursSpecification",
-      "closes": "19:00:00",
-      "dayOfWeek": "http://schema.org/Tuesday",
-      "opens": "09:00:00"
-    }, {
-      "@type": "OpeningHoursSpecification",
-      "closes": "19:00:00",
-      "dayOfWeek": "http://schema.org/Wednesday",
-      "opens": "09:00:00"
-    }, {
-      "@type": "OpeningHoursSpecification",
-      "closes": "19:00:00",
-      "dayOfWeek": "http://schema.org/Thursday",
-      "opens": "09:00:00"
-    }, {
-      "@type": "OpeningHoursSpecification",
-      "closes": "19:00:00",
-      "dayOfWeek": "http://schema.org/Friday",
-      "opens": "09:00:00"
-    }]
-  }, {
-    "@id": "_:vlaamseoverheid-schema",
-    "@type": "GovernmentOrganization",
-    "name": "Vlaamse Overheid",
-    "url": "https://overheid.vlaanderen.be/",
-    "location": [{
-      "@id": "_:vacAntwerpen-schema",
-      "@type": "Place",
-      "name": "Anna Bijnsgebouw (VAC Antwerpen)",
-      "url": "https://www.vlaanderen.be/nl/vlaamse-overheid/anna-bijnsgebouw-vac-antwerpen",
-      "telephone": "+32 32 24 60 81",
-      "address": {
-        "@id": "_:vacAntwerpen-addr-schema",
-        "@type": "PostalAddress",
-        "streetAddress": "Lange Kievitstraat 111-113",
-        "postalCode": "2018",
-        "addressLocality": "Antwerpen",
-        "addresscountry": "BE"
-      }
-    }, {
-      "@id": "_:boudewijngebouw-schema",
-      "@type": "Place",
-      "name": "Boudewijngebouw",
-      "url": "https://www.vlaanderen.be/nl/vlaamse-overheid/boudewijngebouw",
-      "telephone": "+32 25 53 20 88",
-      "address": {
-        "@id": "_:boudewijngebouw-addr-schema",
-        "@type": "PostalAddress",
-        "streetAddress": "Boudewijnlaan 30",
-        "postalCode": "1000",
-        "addressLocality": "Brussel",
-        "addresscountry": "BE"
-      }
-    }, {
-      "@id": "_:jagerstrasse-schema",
-      "@type": "Place",
-      "name": "Wirtschaftsvertretung Flandern C/– Botschaft von Belgien",
-      "telephone": "+49 30 20 64 25 02",
-      "address": {
-        "@id": "_:jagerstrasse-addr-schema",
-        "@type": "PostalAddress",
-        "streetAddress": "Jägerstraße 52-53",
-        "postalCode": "10117",
-        "addressLocality": "Berlijn",
-        "addresscountry": "DE"
-      }
-    }, {
-      "@id": "_:viaFioriOscuri-schema",
-      "@type": "Place",
-      "name": "Flanders Investment and Trade",
-      "telephone": "+39 02 29 00 70 80",
-      "address": {
-        "@id": "_:viaFioriOscuri-addr-schema",
-        "@type": "PostalAddress",
-        "streetAddress": "Via Fiori Oscuri 11",
-        "postalCode": "20121",
-        "addressLocality": "Milaan",
-        "addresscountry": "IT"
-      }
-    }]
-  }, {
-    "@id": "_:1700service-schema",
-    "owl:sameAs": { "@id": "_:1700service-core" }
-  }, {
-    "@id": "_:vlaamseoverheid-schema",
-    "owl:sameAs": { "@id": "_:vlaamseoverheid-core" }
-  }, {
-    "@id": "_:vacAntwerpen-schema",
-    "owl:sameAs": { "@id": "_:vacAntwerpen-core" }
-  }, {
-    "@id": "_:vacAntwerpen-addr-schema",
-    "owl:sameAs": { "@id": "_:vacAntwerpen-addr-core" }
-  }, {
-    "@id": "_:boudewijngebouw-schema",
-    "owl:sameAs": { "@id": "_:boudewijngebouw-core" }
-  }, {
-    "@id": "_:boudewijngebouw-addr-schema",
-    "owl:sameAs": { "@id": "_:boudewijngebouw-addr-core" }
-  }, {
-    "@id": "_:jagerstrasse-schema",
-    "owl:sameAs": { "@id": "_:jagerstrasse-core" }
-  }, {
-    "@id": "_:jagerstrasse-addr-schema",
-    "owl:sameAs": { "@id": "_:jagerstrasse-addr-core" }
-  }, {
-    "@id": "_:viaFioriOscuri-schema",
-    "owl:sameAs": { "@id": "_:viaFioriOscuri-core" }
-  }, {
-    "@id": "_:viaFioriOscuri-addr-schema",
-    "owl:sameAs": { "@id": "_:viaFioriOscuri-addr-core" }
-  }]
+  ]
 }
 </script>
 <!-- JSON-LD end -->
