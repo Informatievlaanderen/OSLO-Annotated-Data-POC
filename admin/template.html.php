@@ -94,6 +94,7 @@
     console.log('template: Cached', gemeenten.length, 'localities')
   }
   var jsonld = <?php echo json_encode($jsonld) ?>;
+  var pageUrl = <?php echo json_encode($pageUrl) ?>;
   // var days = 'Maandag,Disndag,Woensdag,Donderdag,Vrijdag,Zaterdag,Zondag'.split(',')
   var days = 'Mo,Tu,We,Th,Fr,Sa,Su'.split(',')
 

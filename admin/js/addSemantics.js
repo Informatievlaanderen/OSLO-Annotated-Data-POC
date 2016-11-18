@@ -34,6 +34,10 @@ function addSemantics(t) {
   }, {
     "@id": "dct:description",
     "rdfs:seeAlso": { "@id": "schema:description"}
+  }, {
+    "@id": pageUrl,
+    "@type": "ContactPage",
+    "name": "Contact"
   }]
 }
 

@@ -4,6 +4,7 @@ require 'helpers.php';
 
 // Config
 $filename = '../example/index.html';
+$pageUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . 'example/';
 
 // Current state
 $html = file_get_contents($filename);
