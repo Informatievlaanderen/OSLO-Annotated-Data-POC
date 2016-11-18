@@ -2,6 +2,10 @@ var TYPE_LOCATION = ['Place', 'org:Site', 'dct:Location']
 var TYPE_ORGANISATION = ['GovernmentOrganization', 'cpov:PublicOrganization', 'org:FormalOrganization']
 var TYPE_SERVICE = ['GovernmentService', 'cpsv:PublicService']
 
+// var dutchDays = 'Maandag,Dinsdag,Woensdag,Donderdag,Vrijdag,Zaterdag,Zondag'.split(',')
+var days = 'Mo,Tu,We,Th,Fr,Sa,Su'.split(',')
+var fullDays = 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday'.split(',')
+
 function createProp(prop, first) {
   switch (prop) {
     case 'openingHours':
@@ -47,7 +51,6 @@ function createProp(prop, first) {
         description: null,
         email: null,
         name: null,
-        openingHours: null,
         telephone: null,
         url: null,
         'cpsv:provides': createProp('cpsv:provides'),
@@ -118,18 +121,18 @@ function toGraph(a, extraTriples) {
   if (!a || a['@graph']) return a
   return {
     '@context': [{
-        "cpov": "http://data.europa.eu/m8g/",
-        "cpsv": "http://purl.org/vocab/cpsv#",
-        "dct": "http://purl.org/dc/terms/",
-        "foaf": "http://xmlns.com/foaf/0.1/",
-        "locn": "http://www.w3.org/ns/locn#",
-        "org": "http://www.w3.org/ns/org#",
-        "owl": "https://www.w3.org/2002/07/owl#",
-        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-        "schema": "http://schema.org/",
-        "vcard": "https://www.w3.org/2006/vcard/ns#"
+        'cpov': 'http://data.europa.eu/m8g/',
+        'cpsv': 'http://purl.org/vocab/cpsv#',
+        'dct': 'http://purl.org/dc/terms/',
+        'foaf': 'http://xmlns.com/foaf/0.1/',
+        'locn': 'http://www.w3.org/ns/locn#',
+        'org': 'http://www.w3.org/ns/org#',
+        'owl': 'https://www.w3.org/2002/07/owl#',
+        'rdfs': 'http://www.w3.org/2000/01/rdf-schema#',
+        'schema': 'http://schema.org/',
+        'vcard': 'https://www.w3.org/2006/vcard/ns#'
       },
-      "http://schema.org"
+      'http://schema.org'
     ],
     '@graph': collection(a).concat(extraTriples)
   }
@@ -142,12 +145,25 @@ function fromGraph(a) {
 
   var org = a['@graph'].find(isOrganisation) || {}
   var svc = a['@graph'].find(isService) || org['cpsv:provides'] || {}
+  var cpovSvc = a['@graph'].find(isCpsvService) || {}
 
   return Object.assign(createProp('organization'), org, {
-    'cpsv:provides': Object.assign(createProp('service'), svc),
+    'cpsv:provides': fromService(svc, cpovSvc),
     'org:hasSite': null,
     'locn:location': null
   })
+}
+
+function fromService(svc, cpovSvc) {
+  var c = svc.availableChannel || {}
+console.log(cpovSvc)
+  return Object.assign(createProp('service'), {
+    name: svc.name,
+    description: svc.description,
+    url: c.serviceUrl || svc.url,
+    openingHours: (cpovSvc['cpsv:hasChannel'] || {}).openingHours || svc.openingHours || fromHoursAvailable(svc.hoursAvailable),
+    telephone: c.servicePhone && c.servicePhone.telephone || svc.telephone
+  }, svc)
 }
 
 function isOrganisation(a) {
@@ -160,6 +176,10 @@ function isLocation(a) {
 
 function isService(a) {
   return hasCommon(toType(a), TYPE_SERVICE.slice(0, 1))
+}
+
+function isCpsvService(a) {
+  return hasCommon(toType(a), ['cpsv:PublicService'])
 }
 
 // https://github.com/thgh/ld3/blob/gh-pages/src/mixins/Store.js
@@ -182,6 +202,32 @@ function hideNamespace(obj) {
     }
   }
   return obj
+}
+
+// openingHours <-> hourseAvailable
+function fromHoursAvailable(a) {
+  return a && a.map && a.map(h => {
+    console.warn('not implemented')
+  })
+}
+
+function toHoursAvailable(a) {
+  return a && a.map && [].concat.apply([], a.map(h => {
+    return beforeNum(h).split(',').map(day => ({
+      '@type': 'OpeningHoursSpecification',
+      'closes': startAtNum(h).split('-')[1],
+      'dayOfWeek': toSchemaDay(day),
+      'opens': startAtNum(h).split('-')[0]
+    }))
+  }))
+}
+
+function fromSchemaDay (day) {
+  return days[fullDays.indexOf(day)]
+}
+
+function toSchemaDay (day) {
+  return 'http://schema.org/' + fullDays[days.indexOf(day)]
 }
 
 // Assign an array of objects to an object
@@ -229,7 +275,7 @@ function empty(a) {
   return true
 }
 
-function cleanEmpty (x) {
+function cleanEmpty(x) {
   for (var key in x) {
     if (empty(x[key])) {
       delete x[key]
@@ -574,7 +620,7 @@ function vatNumberRenderer(instance, td, row, col, prop, value, cellProperties) 
 
   // if row contains negative number
   if (parseInt(value, 10) < 0) {
-    // add class "negative"
+    // add class 'negative'
     td.className = 'make-me-red';
   }
 
@@ -716,11 +762,12 @@ function slugify(text) {
     .replace(/^-+/, '') // Trim - from start of text
     .replace(/-+$/, ''); // Trim - from end of text
 }
-function randomName(text) {
-  var text = ""
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
-  for( var i=0; i < 5; i++ ) {
+function randomName(text) {
+  var text = ''
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  for (var i = 0; i < 5; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
   }
 

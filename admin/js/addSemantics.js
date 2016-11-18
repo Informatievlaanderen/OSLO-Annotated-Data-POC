@@ -1,4 +1,3 @@
-
 // add... mutates the object
 // to... returns a new object
 
@@ -6,8 +5,8 @@
 function addSemantics(t) {
   return [].concat(
     addSlug(t),
-    transformService(t),
-    splitService(t),
+    toCpsvPublicService(t),
+    toSchemaorgService(t),
     addSchemaorg(t),
     toCpovOrganization(t),
     addTypes(t),
@@ -26,38 +25,56 @@ function addSlug(t) {
   }
 }
 
-function transformService(t) {
-  if (!empty(t['cpsv:provides'])) {
-    if (t['@id']) {
-      t['cpsv:provides']['provider'] = { '@id': t['@id'] }
-    }
-    t['cpsv:provides']['@type'] = 'GovernmentService'
-    providesToServiceChannel(t['cpsv:provides'])
+function toCpsvPublicService(org) {
+  var t = org['cpsv:provides']
+  if (empty(t)) {
+    return
   }
-}
-function splitService(t) {
-  if (!empty(t['cpsv:provides'])) {
-    var copy = inert(t['cpsv:provides'])
-    delete t['cpsv:provides']
-    return copy
+  return {
+    '@id': org['@id'] + '-service-core',
+    '@type': 'cpsv:PublicService',
+    'dct:title': t.name,
+    'dct:description': t.description,
+    'cpsv:hasChannel': {
+      '@id': '_:channel-contact',
+      '@type': ['cpsv:Channel', 'schema:ContactPoint'],
+      'openingHours': t.openingHours,
+      'vcard:hasTelephone': toTelephone(t.telephone)
+    },
+    'schema:contactPoint': toReference('_:channel-contact')
   }
 }
 
-function providesToServiceChannel(t) {
-  t.availableChannel = {
-    '@type': 'ServiceChannel'
+function toSchemaorgService(org) {
+  var t = inert(org['cpsv:provides'])
+  if (empty(t)) {
+    return
   }
-  if (t.telephone) {
-    t.availableChannel.servicePhone = {
+
+  // Extract from organization
+  delete org['cpsv:provides']
+
+  return [{
+    '@id': org['@id'] + '-service',
+    '@type': 'GovernmentService',
+    name: t.name,
+    description: t.description,
+    provider: toReference(org),
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      servicePhone: {
         '@type': 'ContactPoint',
-        'telephone': t.telephone
-      }
-      // delete t.telephone
-  }
-  if (t.url) {
-    t.availableChannel.serviceUrl = t.url
-      // delete t.url
-  }
+        telephone: t.telephone
+          // 'contactOption' : 'TollFree',
+          // 'areaServed': 'BE'
+      },
+      serviceUrl: t.url
+    },
+    hoursAvailable: toHoursAvailable(t.openingHours)
+  }, {
+    '@id': org['@id'] + '-service',
+    'rdfs:seeAlso': toReference(org['@id'] + '-service-core')
+  }]
 }
 
 function addTypes(t) {
@@ -74,17 +91,17 @@ function toCpovOrganization(t) {
     '@type': ['cpov:PublicOrganization', 'org:FormalOrganization'],
     'rdfs:label': t.name,
     'dct:description': t.description,
-    'foaf:homepage': reference(t.url),
-    'cpsv:provides': reference(t['cpsv:provides']),
+    'foaf:homepage': toReference(t.url),
+    'cpsv:provides': toReference(t['cpsv:provides']),
     'locn:location': t.location.map(toLocnLocation),
     'org:hasSite': t.location.map(toOrgHasSite)
   }, {
     '@id': t['@id'],
-    'rdfs:seeAlso': reference(t['@id'] + '-core')
+    'rdfs:seeAlso': toReference(t['@id'] + '-core')
   }]
 }
 
-function toLocnLocation (t) {
+function toLocnLocation(t) {
   return t && {
     '@id': t['@id'],
     '@type': 'dct:Location',
@@ -98,12 +115,13 @@ function toLocnLocation (t) {
     }
   }
 }
-function toOrgHasSite (t) {
+
+function toOrgHasSite(t) {
   return t && {
     '@id': t['@id'],
     '@type': 'org:Site',
     'rdfs:label': t.name,
-    'vcard:hasTelephone': hasTelephone(t.telephone),
+    'vcard:hasTelephone': toTelephone(t.telephone),
     'foaf:page': t.url,
   }
 }
@@ -118,7 +136,7 @@ function addSchemaorg(t) {
   if (t['cpsv:provides'] && t['cpsv:provides'].telephone) {
     t['cpsv:provides']['contactPoint'] = {
       '@type': 'ContactPoint',
-      'vcard:hasTelephone': hasTelephone(t['cpsv:provides'].telephone)
+      'vcard:hasTelephone': toTelephone(t['cpsv:provides'].telephone)
     }
   }
   if (t['openingHours']) {
@@ -127,7 +145,7 @@ function addSchemaorg(t) {
     }
   }
   if (t.telephone) {
-    t['vcard:hasTelephone'] = hasTelephone(t.telephone)
+    t['vcard:hasTelephone'] = toTelephone(t.telephone)
   }
   if (t.location) {
     for (var i = 0; i < t.location.length; i++) {
@@ -140,13 +158,13 @@ function addSchemaorg(t) {
   }
 }
 
-function hasTelephone(p) {
+function toTelephone(p) {
   return p && {
     '@id': 'tel:' + p
   }
 }
 
-function reference(p) {
+function toReference(p) {
   return p && typeof p === 'object' ? p['@id'] && {
     '@id': p['@id']
   } : {
@@ -157,31 +175,31 @@ function reference(p) {
 function seeAlsoPredicates() {
   return [{
     '@id': 'foaf:page',
-    'rdfs:seeAlso': { '@id': 'schema:url'}
+    'rdfs:seeAlso': { '@id': 'schema:url' }
   }, {
     '@id': 'cpsv:provides',
-    'rdfs:seeAlso': { '@id': 'schema:provider'}
+    'rdfs:seeAlso': { '@id': 'schema:provider' }
   }, {
     '@id': 'vcard:hasTelephone',
-    'rdfs:seeAlso': { '@id': 'schema:telephone'}
+    'rdfs:seeAlso': { '@id': 'schema:telephone' }
   }, {
     '@id': 'locn:address',
-    'rdfs:seeAlso': { '@id': 'schema:address'}
+    'rdfs:seeAlso': { '@id': 'schema:address' }
   }, {
     '@id': 'locn:thoroughfare',
-    'rdfs:seeAlso': { '@id': 'schema:streetAddress'}
+    'rdfs:seeAlso': { '@id': 'schema:streetAddress' }
   }, {
     '@id': 'locn:locatorDesignator',
-    'rdfs:seeAlso': { '@id': 'schema:streetAddress'}
+    'rdfs:seeAlso': { '@id': 'schema:streetAddress' }
   }, {
     '@id': 'locn:postName',
-    'rdfs:seeAlso': { '@id': 'schema:addressLocality'}
+    'rdfs:seeAlso': { '@id': 'schema:addressLocality' }
   }, {
     '@id': 'locn:adminUnitL1',
-    'rdfs:seeAlso': { '@id': 'schema:addressCountry'}
+    'rdfs:seeAlso': { '@id': 'schema:addressCountry' }
   }, {
     '@id': 'dct:description',
-    'rdfs:seeAlso': { '@id': 'schema:description'}
+    'rdfs:seeAlso': { '@id': 'schema:description' }
   }, {
     '@id': pageUrl,
     '@type': 'ContactPage',

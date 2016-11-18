@@ -14,7 +14,7 @@ Vue.component('opening-hour', {
   computed: {
     hour: {
       get() {
-        return this.parent.openingHours[this.i]
+        return this.parent.openingHours[this.i] || ''
       },
       set(v) {
         if (v) {

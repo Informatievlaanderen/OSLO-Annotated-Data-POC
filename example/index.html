@@ -1606,14 +1606,32 @@
       "@id": "_:vlaamse-overheid"
     },
     {
+      "@id": "_:vlaamse-overheid-service-core",
+      "@type": "cpsv:PublicService",
+      "dct:title": "Gratis informatienummer van de Vlaamse overheid",
+      "dct:description": "1700 is het gratis informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
+      "cpsv:hasChannel": {
+        "@id": "_:channel-contact",
+        "@type": [
+          "cpsv:Channel",
+          "schema:ContactPoint"
+        ],
+        "openingHours": [
+          "Mo,Tu,We,Th,Fr 09:00-19:00"
+        ],
+        "vcard:hasTelephone": {
+          "@id": "tel:1700"
+        }
+      },
+      "schema:contactPoint": {
+        "@id": "_:channel-contact"
+      }
+    },
+    {
+      "@id": "_:vlaamse-overheid-service",
       "@type": "GovernmentService",
-      "description": "1700 is het gratis informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
       "name": "Gratis informatienummer van de Vlaamse overheid",
-      "openingHours": [
-        "Mo,Tu,We,Th,Fr 09:00-19:00"
-      ],
-      "telephone": "1700",
-      "url": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact",
+      "description": "1700 is het gratis informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
       "provider": {
         "@id": "_:vlaamse-overheid"
       },
@@ -1625,11 +1643,43 @@
         },
         "serviceUrl": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "vcard:hasTelephone": {
-          "@id": "tel:1700"
+      "hoursAvailable": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "closes": "19:00",
+          "dayOfWeek": "http://schema.org/Monday",
+          "opens": "09:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "closes": "19:00",
+          "dayOfWeek": "http://schema.org/Tuesday",
+          "opens": "09:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "closes": "19:00",
+          "dayOfWeek": "http://schema.org/Wednesday",
+          "opens": "09:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "closes": "19:00",
+          "dayOfWeek": "http://schema.org/Thursday",
+          "opens": "09:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "closes": "19:00",
+          "dayOfWeek": "http://schema.org/Friday",
+          "opens": "09:00"
         }
+      ]
+    },
+    {
+      "@id": "_:vlaamse-overheid-service",
+      "rdfs:seeAlso": {
+        "@id": "_:vlaamse-overheid-service-core"
       }
     },
     {
