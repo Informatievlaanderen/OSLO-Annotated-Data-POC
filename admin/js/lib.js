@@ -106,7 +106,7 @@ function toGraph(a) {
   if (!a || a['@graph']) return a
   return {
     '@context': [{
-        "cpov": "http://unknown/cpov#",
+        "cpov": "http://data.europa.eu/m8g/",
         "cpsv": "http://purl.org/vocab/cpsv#",
         "dct": "http://purl.org/dc/terms/",
         "foaf": "http://xmlns.com/foaf/0.1/",
