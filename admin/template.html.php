@@ -18,7 +18,7 @@
 <body>
   <div id="app" v-cloak>
     <header>
-      <a href="/" class="btn btn-lg btn-primary">Home</a>
+      <a href="/example/" class="btn btn-lg btn-primary">Home</a>
       <div class="header-fixed">
         <button type="button" class="btn btn-lg btn-success" @click.prevent="save">Bewaren</button>
         <p>{{ message }}</p>
