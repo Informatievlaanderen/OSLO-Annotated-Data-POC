@@ -3,7 +3,7 @@
 require 'helpers.php';
 
 // Config
-$filename = '../index.html';
+$filename = '../example/index.html';
 
 // Current state
 $html = file_get_contents($filename);
