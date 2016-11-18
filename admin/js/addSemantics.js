@@ -98,12 +98,12 @@ function toCpovOrganization(t) {
   }, {
     '@id': t['@id'],
     'rdfs:seeAlso': toReference(t['@id'] + '-core')
-  }]
+  }].concat(t.location.map(toSeeAlsoLocation))
 }
 
 function toLocnLocation(t) {
   return t && {
-    '@id': t['@id'],
+    '@id': t['@id'] + '-core',
     '@type': 'dct:Location',
     'locn:address': t.address && {
       '@id': t.address['@id'] ? t.address['@id'] + '-core' : null,
@@ -118,7 +118,7 @@ function toLocnLocation(t) {
 
 function toOrgHasSite(t) {
   return t && {
-    '@id': t['@id'],
+    '@id': t['@id'] + '-core',
     '@type': 'org:Site',
     'rdfs:label': t.name,
     'vcard:hasTelephone': toTelephone(t.telephone),
@@ -126,6 +126,12 @@ function toOrgHasSite(t) {
   }
 }
 
+function toSeeAlsoLocation (t) {
+  return t && {
+    '@id': t['@id'],
+    'rdfs:seeAlso': toReference(t['@id'] + '-core'),
+  }
+}
 
 function addSchemaorg(t) {
   if (t.location) {
