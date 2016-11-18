@@ -1,0 +1,86 @@
+{
+  "@context": [
+    {
+      "cpov": "http://data.europa.eu/m8g/",
+      "cpsv": "http://purl.org/vocab/cpsv#",
+      "dct": "http://purl.org/dc/terms/",
+      "foaf": "http://xmlns.com/foaf/0.1/",
+      "locn": "http://www.w3.org/ns/locn#",
+      "org": "http://www.w3.org/ns/org#",
+      "owl": "https://www.w3.org/2002/07/owl#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "http://schema.org/",
+      "vcard": "https://www.w3.org/2006/vcard/ns#"
+    },
+    "http://schema.org"
+  ],
+  "@graph": [
+    {
+      "@type": "GovernmentOrganization",
+      "name": "Vlaamse Overheid",
+      "url": "https://overheid.vlaanderen.be/",
+      "cpsv:provides": {
+        "@type": "GovernmentService",
+        "description": "1700 is het gratis informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
+        "name": "Gratis informatienummer van de Vlaamse overheid",
+        "openingHours": [
+          "Mo,Tu,We,Th,Fr 09:00-19:00"
+        ],
+        "telephone": "1700",
+        "url": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact"
+      },
+      "location": [
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BE",
+            "addressLocality": "Antwerpen",
+            "postalCode": "2018",
+            "streetAddress": "Lange Kievitstraat 111-113"
+          },
+          "name": "Anna Bijnsgebouw (VAC Antwerpen)",
+          "telephone": "+32 32 24 60 81",
+          "url": "https://www.vlaanderen.be/nl/vlaamse-overheid/anna-bijnsgebouw-vac-antwerpen"
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BE",
+            "addressLocality": "Brussel",
+            "postalCode": "1000",
+            "streetAddress": "Boudewijnlaan 30"
+          },
+          "name": "Boudewijngebouw",
+          "telephone": "+32 25 53 20 88",
+          "url": "https://www.vlaanderen.be/nl/vlaamse-overheid/boudewijngebouw"
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "DE",
+            "addressLocality": "Berlijn",
+            "postalCode": "10117",
+            "streetAddress": "Jägerstraße 52-53"
+          },
+          "name": "Wirtschaftsvertretung Flandern C/– Botschaft von Belgien",
+          "telephone": "+49 30 20 64 25 02"
+        },
+        {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IT",
+            "addressLocality": "Milaan",
+            "postalCode": "20121",
+            "streetAddress": "Via Fiori Oscuri 11"
+          },
+          "name": "Flanders Investment and Trade",
+          "telephone": "+39 02 29 00 70 80"
+        }
+      ]
+    }
+  ]
+}

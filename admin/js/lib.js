@@ -142,7 +142,7 @@ function fromGraph(a) {
   var orgs = a['@graph'].filter(isOrganisation)
   var locations = a['@graph'].filter(isLocation)
   var org = assignArray({}, orgs)
-  return Object.assign({}, org, { 'org:hasSite': null })
+  return Object.assign({}, org, { 'org:hasSite': null, 'locn:location': null })
 }
 
 function isOrganisation(a) {
@@ -168,7 +168,7 @@ function hideNamespace(obj) {
   }
   // Hide nested props
   for (let prop in obj) {
-    if (typeof obj[prop] === 'object' && Object.keys(obj[prop]).length > 1) {
+    if (typeof obj[prop] === 'object' && obj[prop] !== null && Object.keys(obj[prop]).length > 1) {
       obj[prop] = hideNamespace(obj[prop])
     }
   }

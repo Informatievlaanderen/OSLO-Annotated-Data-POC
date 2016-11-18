@@ -233,6 +233,7 @@
           // Filter out empty values
           cleanEmpty(x)
           x = toGraph(x, extraTriples)
+          cleanEmpty(x)
           x = JSON.stringify(x, null, 2)
           if (x !== this.stringified) {
             this.stringified = x
