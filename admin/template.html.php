@@ -6,17 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>OSLO Annotated Data POC</title>
   <meta name="theme-color" content="#099">
-
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="googlebot" content="noindex, nofollow">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/select2@4.0.3/dist/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/select2-bootstrap-theme@0.1.0-beta.9/dist/select2-bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/admin/css/main.css">
-  </head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/select2@4.0.3/dist/css/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/select2-bootstrap-theme@0.1.0-beta.9/dist/select2-bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/admin/css/main.css">
 </head>
 
 <body>
