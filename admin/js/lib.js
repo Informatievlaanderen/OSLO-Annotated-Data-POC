@@ -41,6 +41,18 @@ function createProp(prop, first) {
         telephone: null,
         url: null
       }
+    case 'organization':
+      return {
+        '@type': 'GovernmentOrganization',
+        description: null,
+        email: null,
+        name: null,
+        openingHours: null,
+        telephone: null,
+        url: null,
+        'cpsv:provides': createProp('cpsv:provides'),
+        location: [createProp('location')]
+      }
   }
   return {
     '@type': prop
@@ -102,7 +114,7 @@ function toType(a) {
   return collection(a && a['@type'])
 }
 
-function toGraph(a) {
+function toGraph(a, extraTriples) {
   if (!a || a['@graph']) return a
   return {
     '@context': [{
@@ -119,7 +131,7 @@ function toGraph(a) {
       },
       "http://schema.org"
     ],
-    '@graph': collection(a)
+    '@graph': collection(a).concat(extraTriples)
   }
 }
 

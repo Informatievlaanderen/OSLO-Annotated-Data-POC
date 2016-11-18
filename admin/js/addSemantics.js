@@ -1,9 +1,40 @@
+
+// Return a list of triples
 function addSemantics(t) {
   addSlug(t)
   transformService(t)
   addSchemaorg(t)
   addISAcore(t)
   addTypes(t)
+
+  return [{
+    "@id": "foaf:page",
+    "rdfs:seeAlso": { "@id": "schema:url"}
+  }, {
+    "@id": "cpsv:provides",
+    "rdfs:seeAlso": { "@id": "schema:provider"}
+  }, {
+    "@id": "vcard:hasTelephone",
+    "rdfs:seeAlso": { "@id": "schema:telephone"}
+  }, {
+    "@id": "locn:address",
+    "rdfs:seeAlso": { "@id": "schema:address"}
+  }, {
+    "@id": "locn:thoroughfare",
+    "rdfs:seeAlso": { "@id": "schema:streetAddress"}
+  }, {
+    "@id": "locn:locatorDesignator",
+    "rdfs:seeAlso": { "@id": "schema:streetAddress"}
+  }, {
+    "@id": "locn:postName",
+    "rdfs:seeAlso": { "@id": "schema:addressLocality"}
+  }, {
+    "@id": "locn:adminUnitL1",
+    "rdfs:seeAlso": { "@id": "schema:addressCountry"}
+  }, {
+    "@id": "dct:description",
+    "rdfs:seeAlso": { "@id": "schema:description"}
+  }]
 }
 
 function addSlug(t) {

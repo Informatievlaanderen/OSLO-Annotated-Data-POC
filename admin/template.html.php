@@ -74,6 +74,7 @@
   <script src="/admin/js/browser-soap.min.js"></script>
 
   <script src="/admin/js/lib.js"></script>
+  <script src="/admin/js/addSemantics.js"></script>
 
   <!-- Vue components -->
   <?php require 'components/organization.php' ?>
@@ -99,11 +100,7 @@
   var jsonld = <?php echo json_encode($jsonld) ?>;
   // var days = 'Maandag,Disndag,Woensdag,Donderdag,Vrijdag,Zaterdag,Zondag'.split(',')
   var days = 'Mo,Tu,We,Th,Fr,Sa,Su'.split(',')
-  var props = ['url', 'email', 'telephone', 'name', 'description', 'vatID', 'openingHours', '@id']
-  var nestedProps = {
-    'cpsv:provides': createProp('cpsv:provides'),
-    location: [createProp('location')]
-  }
+
   Vue.mixin({
     data() {
       return {
@@ -147,7 +144,7 @@
     }
   }
 
-  thing = Object.assign(toObject(props), nestedProps, thing)
+  thing = Object.assign(createProp('organization'), thing)
   var $root = new Vue({
     el: '#app',
     data() {
@@ -183,7 +180,7 @@
     },
     methods: {
       reset() {
-        this.thing = Object.assign(toObject(props), nestedProps)
+        this.thing = createProp('organization')
         window.scrollTo(0, 0)
       },
       setMessage(msg) {
@@ -235,10 +232,10 @@
           x.url = fixUrl(x.url)
           x.email = fixEmail(x.email)
           x.telephone = fixTelephone(x.telephone)
-          addSemantics(x)
+          var extraTriples = addSemantics(x)
           // Filter out empty values
           cleanEmpty(x)
-          x = toGraph(x)
+          x = toGraph(x, extraTriples)
           x = JSON.stringify(x, null, 2)
           if (x !== this.stringified) {
             this.stringified = x

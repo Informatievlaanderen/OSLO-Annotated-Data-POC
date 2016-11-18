@@ -8,7 +8,7 @@ $org = $data->$graph[0];
 $locations = implode('', array_map(function ($location) {
   return '<h3 style="margin:1em 0 0;">' . htmlentities($location->name) . '</h3><p>'
     . htmlentities($location->address->streetAddress) . ', '
-    . htmlentities($location->address->addressLocality) 
+    . htmlentities($location->address->addressLocality) . ' '
     . htmlentities($location->address->addressCountry); 
 
 }, $org->location ?? []));
