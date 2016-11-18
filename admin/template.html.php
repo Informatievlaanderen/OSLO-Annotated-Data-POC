@@ -136,8 +136,8 @@
   }
   if (thing.location) {
     for (var i = 0; i < thing.location.length; i++) {
-      thing.location[i] =  Object.assign(createProp('location'), thing.location[i])
-      thing.location[i].address =  Object.assign(createProp('address'), thing.location[i].address)
+      thing.location[i] = Object.assign(createProp('location'), thing.location[i])
+      thing.location[i].address = Object.assign(createProp('address'), thing.location[i].address)
     }
   }
 
@@ -204,23 +204,6 @@
       }
     },
     watch: {
-      // stringified (x, y) {
-      //  console.log('str')
-      //  if (x === y) {
-      //    return
-      //  }
-      //  try  {
-      //    var x = JSON.parse(x)
-      //    if (x && typeof x === 'object') {
-      //      for (var key in x) {
-      //        if (x[key] && this.thing[key] !== x[key]) {
-      //          console.log('str set', key)
-      //          this.$set(this.thing, key, x[key])
-      //        }
-      //      }
-      //    }
-      //  } catch(e) {}
-      // }
       thing: {
         deep: true,
         handler (x, y) {

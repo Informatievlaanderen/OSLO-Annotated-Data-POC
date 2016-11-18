@@ -7,6 +7,7 @@ function addSemantics(t) {
   return [].concat(
     addSlug(t),
     transformService(t),
+    splitService(t),
     addSchemaorg(t),
     toCpovOrganization(t),
     addTypes(t),
@@ -32,6 +33,13 @@ function transformService(t) {
     }
     t['cpsv:provides']['@type'] = 'GovernmentService'
     providesToServiceChannel(t['cpsv:provides'])
+  }
+}
+function splitService(t) {
+  if (!empty(t['cpsv:provides'])) {
+    var copy = inert(t['cpsv:provides'])
+    delete t['cpsv:provides']
+    return copy
   }
 }
 

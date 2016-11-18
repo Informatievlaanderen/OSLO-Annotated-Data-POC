@@ -1535,33 +1535,6 @@
       "@type": "GovernmentOrganization",
       "name": "Vlaamse Overheid",
       "url": "https://overheid.vlaanderen.be/",
-      "cpsv:provides": {
-        "@type": "GovernmentService",
-        "description": "1700 is het gratis informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
-        "name": "Gratis informatienummer van de Vlaamse overheid",
-        "openingHours": [
-          "Mo,Tu,We,Th,Fr 09:00-19:00"
-        ],
-        "telephone": "1700",
-        "url": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact",
-        "provider": {
-          "@id": "_:vlaamse-overheid"
-        },
-        "availableChannel": {
-          "@type": "ServiceChannel",
-          "servicePhone": {
-            "@type": "ContactPoint",
-            "telephone": "1700"
-          },
-          "serviceUrl": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact"
-        },
-        "schema:contactPoint": {
-          "@type": "ContactPoint",
-          "vcard:hasTelephone": {
-            "@id": "tel:1700"
-          }
-        }
-      },
       "location": [
         {
           "@type": "Place",
@@ -1633,13 +1606,39 @@
       "@id": "_:vlaamse-overheid"
     },
     {
+      "@type": "GovernmentService",
+      "description": "1700 is het gratis informatienummer van de Vlaamse overheid, voorheen bekend als de Vlaamse Infolijn. 1700 is voor burgers, bedrijven en organisaties het eerste aanspreekpunt voor vragen aan de Vlaamse overheid. Ze kunnen er terecht voor klantgerichte overheidsinformatie en informatie over de status van hun lopende dossiers.",
+      "name": "Gratis informatienummer van de Vlaamse overheid",
+      "openingHours": [
+        "Mo,Tu,We,Th,Fr 09:00-19:00"
+      ],
+      "telephone": "1700",
+      "url": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact",
+      "provider": {
+        "@id": "_:vlaamse-overheid"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "servicePhone": {
+          "@type": "ContactPoint",
+          "telephone": "1700"
+        },
+        "serviceUrl": "http://www.vlaanderen.be/nl/vlaamse-overheid/contact"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "vcard:hasTelephone": {
+          "@id": "tel:1700"
+        }
+      }
+    },
+    {
       "@id": "_:vlaamse-overheid-core",
       "@type": [
         "cpov:PublicOrganization",
         "org:FormalOrganization"
       ],
       "rdfs:label": "Vlaamse Overheid",
-      "dct:description": null,
       "foaf:homepage": {
         "@id": "https://overheid.vlaanderen.be/"
       },
@@ -1648,7 +1647,6 @@
           "@id": "_:vlaamse-overheid-anna-bijnsgebouw-vac-antwerpen",
           "@type": "dct:Location",
           "locn:address": {
-            "@id": null,
             "@type": "locn:Address",
             "locn:thoroughfare": "Lange Kievitstraat",
             "locn:locatorDesignator": "111-113",
@@ -1660,7 +1658,6 @@
           "@id": "_:vlaamse-overheid-boudewijngebouw",
           "@type": "dct:Location",
           "locn:address": {
-            "@id": null,
             "@type": "locn:Address",
             "locn:thoroughfare": "Boudewijnlaan",
             "locn:locatorDesignator": "30",
@@ -1672,7 +1669,6 @@
           "@id": "_:vlaamse-overheid-wirtschaftsvertretung-flandern-c-botschaft-von-belgien",
           "@type": "dct:Location",
           "locn:address": {
-            "@id": null,
             "@type": "locn:Address",
             "locn:thoroughfare": "Jägerstraße",
             "locn:locatorDesignator": "52-53",
@@ -1684,7 +1680,6 @@
           "@id": "_:vlaamse-overheid-flanders-investment-and-trade",
           "@type": "dct:Location",
           "locn:address": {
-            "@id": null,
             "@type": "locn:Address",
             "locn:thoroughfare": "Via Fiori Oscuri",
             "locn:locatorDesignator": "11",
@@ -1718,8 +1713,7 @@
           "rdfs:label": "Wirtschaftsvertretung Flandern C/– Botschaft von Belgien",
           "vcard:hasTelephone": {
             "@id": "tel:+49 30 20 64 25 02"
-          },
-          "foaf:page": null
+          }
         },
         {
           "@id": "_:vlaamse-overheid-flanders-investment-and-trade",
@@ -1727,8 +1721,7 @@
           "rdfs:label": "Flanders Investment and Trade",
           "vcard:hasTelephone": {
             "@id": "tel:+39 02 29 00 70 80"
-          },
-          "foaf:page": null
+          }
         }
       ]
     },

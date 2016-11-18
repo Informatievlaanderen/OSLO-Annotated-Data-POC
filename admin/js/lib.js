@@ -138,11 +138,16 @@ function toGraph(a, extraTriples) {
 function fromGraph(a) {
   if (!a || !a['@graph'] || !a['@graph'].length) return a
 
-  a = hideNamespace(a)
-  var orgs = a['@graph'].filter(isOrganisation)
-  var locations = a['@graph'].filter(isLocation)
-  var org = assignArray({}, orgs)
-  return Object.assign({}, org, { 'org:hasSite': null, 'locn:location': null })
+  // a = hideNamespace(a)
+
+  var org = a['@graph'].find(isOrganisation) || {}
+  var svc = a['@graph'].find(isService) || org['cpsv:provides'] || {}
+
+  return Object.assign(createProp('organization'), org, {
+    'cpsv:provides': Object.assign(createProp('service'), svc),
+    'org:hasSite': null,
+    'locn:location': null
+  })
 }
 
 function isOrganisation(a) {
@@ -151,6 +156,10 @@ function isOrganisation(a) {
 
 function isLocation(a) {
   return hasCommon(toType(a), TYPE_LOCATION)
+}
+
+function isService(a) {
+  return hasCommon(toType(a), TYPE_SERVICE.slice(0, 1))
 }
 
 // https://github.com/thgh/ld3/blob/gh-pages/src/mixins/Store.js
