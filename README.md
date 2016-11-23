@@ -14,15 +14,15 @@ Saving will send a PUT request to replace the old metadata by the latest JSON-LD
 ### Get started
     docker pull thgh/oslo
 
-### Run the project on port 81
-    docker stop oslo1
-    docker rm oslo1
-    docker run -d --name oslo1 -p 81:80 thgh/oslo
+### Run the project
+    docker run -it --rm --name oslo -p 80:80 thgh/oslo
+    
+You can now browse to [localhost](http://localhost) to view the page.
+
+When running in windows, you may need to do `docker-machine ip` to find the IP of the server (rather than `localhost`).
 
 ### Development
-    docker stop oslo1
-    docker rm oslo1
-    docker run -d --name oslo1 -p 81:80 -v /Users/thomas/projects/oslo:/var/www/html thgh/oslo
+    docker run -it --rm --name oslo -p 81:80 -v /Users/thomas/projects/oslo:/var/www/html thgh/oslo
 
 ### After development
     docker build -t thgh/oslo .
