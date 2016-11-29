@@ -21,8 +21,17 @@ You can now browse to [localhost](http://localhost) to view the page.
 
 When running in windows, you may need to do `docker-machine ip` to find the IP of the server (rather than `localhost`).
 
+### Production with protected admin page
+    mkdir password
+    htpasswd -cb ./password/.htpasswd admin password
+    docker run -it --rm --name oslo -p 80:80 -v /Users/thomas/projects/oslo/password:/var/password thgh/oslo
+
+Replace `admin password` by the desired username and password.
+
 ### Development
     docker run -it --rm --name oslo -p 81:80 -v /Users/thomas/projects/oslo:/var/www/html thgh/oslo
+
+The default username & password for the admin page is `admin` & `admin`.
 
 ### After development
     docker build -t thgh/oslo .
