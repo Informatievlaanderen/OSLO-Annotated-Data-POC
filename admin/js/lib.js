@@ -147,6 +147,12 @@ function fromGraph(a) {
   var svc = a['@graph'].find(isService) || org['cpsv:provides'] || {}
   var cpovSvc = a['@graph'].find(isCpsvService) || {}
 
+  if (org.location && org.location.length) {
+    for (var i = org.location.length - 1; i >= 0; i--) {
+      delete org.location[i]['vcard:hasTelephone']
+    }
+  }
+
   return Object.assign(createProp('organization'), org, {
     'cpsv:provides': fromService(svc, cpovSvc),
     'org:hasSite': null,
@@ -156,7 +162,6 @@ function fromGraph(a) {
 
 function fromService(svc, cpovSvc) {
   var c = svc.availableChannel || {}
-console.log(cpovSvc)
   return Object.assign(createProp('service'), {
     name: svc.name,
     description: svc.description,

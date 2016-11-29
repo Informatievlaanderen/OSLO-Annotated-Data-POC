@@ -94,6 +94,7 @@ function toCpovOrganization(t) {
     'foaf:homepage': toReference(t.url),
     'cpsv:provides': toReference(t['cpsv:provides']),
     'locn:location': t.location.map(toLocnLocation),
+    'vcard:hasTelephone': toTelephone(t.telephone),
     'org:hasSite': t.location.map(toOrgHasSite)
   }, {
     '@id': t['@id'],
@@ -148,7 +149,6 @@ function addSchemaorg(t) {
   }
   if (t.telephone) {
     t.telephone = fixTelephone(t.telephone)
-    t['vcard:hasTelephone'] = t['@type'] === TYPE_LOCATION[0] ? null : toTelephone(t.telephone)
   }
   if (t.location) {
     for (var i = 0; i < t.location.length; i++) {
