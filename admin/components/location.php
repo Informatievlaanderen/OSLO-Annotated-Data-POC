@@ -3,6 +3,7 @@
     <!-- <div class="card-type">locatie</div> -->
     <div class="card-header" @click="show.card=1">
       <i class="fa-chevron-left glyphicon glyphicon-phone"></i>
+      <img class="card-delete" src="css/icons/ic_delete_forever_black_24px.svg" @click.stop="$emit('rm')">
       <h4 class="card-title"><input type="text" v-model="l.name" class="form-control control-subtle" placeholder="Naam van de locatie" autofocus></h4>
       <h6 class="card-subtitle text-muted" v-if="!show.card&&l.address&&l.address.addressLocality">{{ l.address.streetAddress }}, {{l.address.addressLocality}}</h6>
     </div>

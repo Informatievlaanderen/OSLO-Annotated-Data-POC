@@ -122,6 +122,18 @@ header p {
   font-size: 12px;
   line-height: 1.5em;
 }
+.card-delete {
+  float: right;
+  margin-top: 4px;
+  opacity: .3;
+  cursor: pointer;
+}
+.card-delete:hover {
+  opacity: 1;
+}
+.card-delete+.card-title {
+  margin-right: 40px;
+}
 .card-title {
   margin-bottom: 0;
 }

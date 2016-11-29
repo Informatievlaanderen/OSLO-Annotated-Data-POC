@@ -33,7 +33,7 @@
       <service :svc="thing['cpsv:provides']"></service>
 
       <h2 class="h2-subtle">Locaties / kantoren</h2>
-      <location v-for="l in thing.location" :l="l"></location>
+      <location v-for="(l, index) in thing.location" :l="l" @rm="thing.location.splice(index, 1)"></location>
       <div class="card card-add" @click="addM('thing', 'location')">
         <div class="card-header">
           <h4 class="card-title">Locatie toevoegen</h4>
