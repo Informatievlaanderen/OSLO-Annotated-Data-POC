@@ -12,7 +12,7 @@
         <div class="card-addfields">
           <a href="#" v-if="!l.telephone&&!show.telephone" @click.prevent="add('telephone')">telefoon</a>
           <a href="#" v-if="!l.url&&!show.url" @click.prevent="add('url')">url</a>
-          <a href="#" v-if="!l.openingHours" @click.prevent="addM('l', 'openingHours')">openingsuren</a>
+          <!-- <a href="#" v-if="!l.openingHours" @click.prevent="addM('l', 'openingHours')">openingsuren</a> -->
         </div>
         <div class="form-group" :class="{'has-danger':errors.telephone}" v-if="l.telephone||show.telephone">
           <input type="text" class="form-control" v-model="l.telephone" placeholder="Telefoon">
