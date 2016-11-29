@@ -330,7 +330,7 @@ function fixEmail(e) {
 
 function fixTelephone(t) {
   // return t.replace(/[^0-9\+]/g, '')
-  return t.replace(/\s/g, '')
+  return t && t.replace(/\s/g, '')
 }
 
 // vatID helper

@@ -105,6 +105,7 @@ function toLocnLocation(t) {
   return t && {
     '@id': t['@id'] + '-core',
     '@type': 'dct:Location',
+    'vcard:hasTelephone': toTelephone(t.telephone),
     'locn:address': t.address && {
       '@id': t.address['@id'] ? t.address['@id'] + '-core' : null,
       '@type': 'locn:Address',
@@ -134,11 +135,6 @@ function toSeeAlsoLocation (t) {
 }
 
 function addSchemaorg(t) {
-  if (t.location) {
-    for (var i = 0; i < t.location.length; i++) {
-      t.location[i]['@type'] = TYPE_LOCATION[0]
-    }
-  }
   if (t['cpsv:provides'] && t['cpsv:provides'].telephone) {
     t['cpsv:provides']['contactPoint'] = {
       '@type': 'ContactPoint',
@@ -151,10 +147,11 @@ function addSchemaorg(t) {
     }
   }
   if (t.telephone) {
-    t['vcard:hasTelephone'] = toTelephone(t.telephone)
+    t['vcard:hasTelephone'] = t['@type'] === TYPE_LOCATION[0] ? null : toTelephone(t.telephone)
   }
   if (t.location) {
     for (var i = 0; i < t.location.length; i++) {
+      t.location[i]['@type'] = TYPE_LOCATION[0]
       addSchemaorg(t.location[i])
       if (t.location[i].address && t.location[i].address.addresscountry) {
         t.location[i].address.addressCountry = t.location[i].address.addresscountry
