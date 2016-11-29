@@ -64,7 +64,7 @@ function toSchemaorgService(org) {
       '@type': 'ServiceChannel',
       servicePhone: {
         '@type': 'ContactPoint',
-        telephone: t.telephone
+        telephone: fixTelephone(t.telephone)
           // 'contactOption' : 'TollFree',
           // 'areaServed': 'BE'
       },
@@ -166,7 +166,7 @@ function addSchemaorg(t) {
 
 function toTelephone(p) {
   return p && {
-    '@id': 'tel:' + p
+    '@id': 'tel:' + fixTelephone(p)
   }
 }
 
