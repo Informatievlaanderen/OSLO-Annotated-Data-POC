@@ -147,6 +147,7 @@ function addSchemaorg(t) {
     }
   }
   if (t.telephone) {
+    t.telephone = fixTelephone(t.telephone)
     t['vcard:hasTelephone'] = t['@type'] === TYPE_LOCATION[0] ? null : toTelephone(t.telephone)
   }
   if (t.location) {
