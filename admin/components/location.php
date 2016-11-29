@@ -11,15 +11,11 @@
       <div class="card-block form-group-reduce">
         <div class="card-addfields">
           <a href="#" v-if="!l.telephone&&!show.telephone" @click.prevent="add('telephone')">telefoon</a>
-          <a href="#" v-if="!l.email&&!show.email" @click.prevent="add('email')">email</a>
           <a href="#" v-if="!l.url&&!show.url" @click.prevent="add('url')">url</a>
           <a href="#" v-if="!l.openingHours" @click.prevent="addM('l', 'openingHours')">openingsuren</a>
         </div>
         <div class="form-group" :class="{'has-danger':errors.telephone}" v-if="l.telephone||show.telephone">
           <input type="text" class="form-control" v-model="l.telephone" placeholder="Telefoon">
-        </div>
-        <div class="form-group" :class="{'has-danger':errors.email}" v-if="l.email||show.email">
-          <input type="text" class="form-control" v-model="l.email" placeholder="E-mail">
         </div>
         <div class="form-group" :class="{'has-danger':errors.url}" v-if="l.url||show.url">
           <input type="text" class="form-control" v-model="l.url" placeholder="URL">
@@ -89,7 +85,6 @@ Vue.component('location', {
       straten: [],
       show: {
         card: false,
-        email: false,
         telephone: false,
         url: false
       }
@@ -99,7 +94,6 @@ Vue.component('location', {
     errors () {
       var errors = {}
       errors.url = this.l.url ? !fixUrl(this.l.url) : 0
-      errors.email = this.l.email ? !fixEmail(this.l.email) : 0
       errors.telephone = this.l.telephone ? !fixTelephone(this.l.telephone) : 0
       return errors
     },
